@@ -26,10 +26,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
 public class MainActivity extends AppCompatActivity{
     Spinner spinner = null;
     Button timebutton = null;
@@ -44,7 +40,9 @@ public class MainActivity extends AppCompatActivity{
             "Tampere Plevna", "Turku Kinopalatsi"};
     String[] movies = {"movie1", "movie2", "movie3"};
 
+    ArrayAdapter<Theaterinfo> adapter = null;
     ArrayAdapter<String> adapter2 = null;
+    ArrayList<Theaterinfo> arrayList = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +63,15 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void spinner(){
+
+        adapter = new ArrayAdapter<Theaterinfo>(this, android.R.layout.simple_spinner_item, arrayList);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinner.setAdapter(adapter);
+
+        //editTheaterInfo();
+
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -76,15 +83,13 @@ public class MainActivity extends AppCompatActivity{
 
             }
         });
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, theaterlist);
-
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        spinner.setAdapter(adapter);
-
-
     }
+
+    /*public void editTheaterInfo(){
+        Theaterinfo theaterInfo = (Theaterinfo) spinner.getSelectedItem();
+        String name = theaterInfo.getName();
+        int ID = theaterInfo.getID();
+    } */
 
     //datepicker??
     public void calendarView(){
@@ -143,8 +148,10 @@ public class MainActivity extends AppCompatActivity{
 
     public void readXML(){
         //kutsutaan mainclass readXML ja saadaan lista elokuvateat.
+
+        arrayList = new ArrayList<Theaterinfo>();
         Mainclass mainclass = new Mainclass();
-        mainclass.readXML();
+        arrayList = mainclass.readXML();
     }
 }
 

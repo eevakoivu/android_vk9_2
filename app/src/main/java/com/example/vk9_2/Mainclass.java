@@ -25,9 +25,11 @@ public class Mainclass {
 
 
 
-    public void readXML() {
+    public ArrayList<Theaterinfo> readXML() {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+
+        ArrayList<Theaterinfo> arrayList = null;
 
         try {
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -38,8 +40,7 @@ public class Mainclass {
 
             NodeList nList = doc.getDocumentElement().getElementsByTagName("TheatreArea");
 
-            Theaterinfo theaterinfo = null;  //luodaan teatteriolio
-            ArrayList<Theaterinfo> arrayList= new ArrayList<Theaterinfo>(); //luodaan lista olioista
+            arrayList = new ArrayList<Theaterinfo>(); //luodaan lista olioista
 
             for(int i=0; i<nList.getLength(); i++){
                 Node node = nList.item(i); //yhden teatterin tiedot
@@ -52,12 +53,13 @@ public class Mainclass {
 
                     if(i>=2){
                         arrayList.add(new Theaterinfo(name, ID)); //lisätään olio listalle
-                        System.out.println(arrayList.get(i).getname() + "+" + arrayList.get(i).getID());
+                        //System.out.println(arrayList.get(i-2).getname() + "+" + arrayList.get(i-2).getID());
                     }
 
                 }
 
             }
+
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -65,9 +67,8 @@ public class Mainclass {
             e.printStackTrace();
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
-        } finally {
-            System.out.println("Done");
         }
+        return arrayList;
     }
 }
 
