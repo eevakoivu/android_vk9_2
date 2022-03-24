@@ -1,11 +1,15 @@
 package com.example.vk9_2;
 
+import android.os.StrictMode;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -19,7 +23,12 @@ public class Mainclass {
     //oliot teattereista (vrt. Bottle) Theaterinfo
     //lue lista teattereista -> MainActivitiin
 
+
+
     public void readXML() {
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
         try {
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             String urlString = "https://www.finnkino.fi/xml/TheatreAreas/";
@@ -29,14 +38,23 @@ public class Mainclass {
 
             NodeList nList = doc.getDocumentElement().getElementsByTagName("TheatreArea");
 
+            Theaterinfo theaterinfo = null;  //luodaan teatteriolio
+            ArrayList<Theaterinfo> arrayList= new ArrayList<Theaterinfo>(); //luodaan lista olioista
+
             for(int i=0; i<nList.getLength(); i++){
                 Node node = nList.item(i); //yhden teatterin tiedot
 
                 if(node.getNodeType() == Node.ELEMENT_NODE){
                     Element element = (Element) node;
 
-                    element.getElementsByTagName("ID").item(0).getTextContent();
-                    element.getElementsByTagName("Name").item(0).getTextContent();
+                    int ID = Integer.valueOf(element.getElementsByTagName("ID").item(0).getTextContent());
+                    String name = element.getElementsByTagName("Name").item(0).getTextContent();
+
+                    if(i>=2){
+                        arrayList.add(new Theaterinfo(name, ID)); //lisätään olio listalle
+                        System.out.println(arrayList.get(i).getname() + "+" + arrayList.get(i).getID());
+                    }
+
                 }
 
             }

@@ -56,12 +56,11 @@ public class MainActivity extends AppCompatActivity{
         editText = (EditText) findViewById(R.id.editText);
         listView = (ListView) findViewById(R.id.listView);
 
+        readXML();
         spinner();
         calendarView();
         listView();
         editText();
-        readXML();
-
 
     }
 
@@ -144,6 +143,8 @@ public class MainActivity extends AppCompatActivity{
 
     public void readXML(){
         //kutsutaan mainclass readXML ja saadaan lista elokuvateat.
+        Mainclass mainclass = new Mainclass();
+        mainclass.readXML();
     }
 }
 
