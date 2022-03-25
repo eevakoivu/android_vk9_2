@@ -34,10 +34,6 @@ public class MainActivity extends AppCompatActivity{
     ListView listView = null;
     int hour, minute;
     int year, month, day;
-    String[] theaterlist = {"Espoo Omena", "Espoo Sello", "Helsinki Itis", "Helsinki Kinopalatsi",
-            "Helsinki Maxim", "Helsinki Tennispalatsi", "Vantaa Flamingo", "Jyväskylä Fantasia", "Kuopio Scala",
-            "Lahti Kuvapalatsi", "Lappeenranta Strand", "Oulu Plaza", "Pori Promenadi", "Tampere Cine Atlas",
-            "Tampere Plevna", "Turku Kinopalatsi"};
     String[] movies = {"movie1", "movie2", "movie3"};
 
     ArrayAdapter<Theaterinfo> adapter = null;
@@ -70,8 +66,6 @@ public class MainActivity extends AppCompatActivity{
 
         spinner.setAdapter(adapter);
 
-        //editTheaterInfo();
-
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -85,13 +79,6 @@ public class MainActivity extends AppCompatActivity{
         });
     }
 
-    /*public void editTheaterInfo(){
-        Theaterinfo theaterInfo = (Theaterinfo) spinner.getSelectedItem();
-        String name = theaterInfo.getName();
-        int ID = theaterInfo.getID();
-    } */
-
-    //datepicker??
     public void calendarView(){
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -99,7 +86,6 @@ public class MainActivity extends AppCompatActivity{
                 year=i;
                 month=i1+1;
                 day=i2;
-                //System.out.println(day+"."+month+"."+year);
             }
         });
     }
@@ -119,8 +105,6 @@ public class MainActivity extends AppCompatActivity{
         timePickerDialog.show();
     }
 
-    //edittext
-    //nimi.setontextchangelastener(new NiMi.OntextchangeListener)
     public void listView(){
         adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, movies);
         listView.setAdapter(adapter2);
@@ -147,8 +131,6 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void readXML(){
-        //kutsutaan mainclass readXML ja saadaan lista elokuvateat.
-
         arrayList = new ArrayList<Theaterinfo>();
         Mainclass mainclass = new Mainclass();
         arrayList = mainclass.readXML();

@@ -11,21 +11,6 @@ public class Theaterinfo {
         this.ID=ID;
     }
 
-    public String getName(){
-        return name;
-    }
-
-    public void setName(){
-        this.name=name;
-    }
-
-    public int getID(){
-        return ID;
-    }
-
-    public void setID(){
-        this.ID=ID;
-    }
 
     @Override
     public String toString() {

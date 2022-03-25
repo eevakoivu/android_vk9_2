@@ -36,7 +36,7 @@ public class Mainclass {
             String urlString = "https://www.finnkino.fi/xml/TheatreAreas/";
             Document doc = builder.parse(urlString);
             doc.getDocumentElement().normalize();
-            System.out.println("Root element: " + doc.getDocumentElement().getNodeName());
+            //System.out.println("Root element: " + doc.getDocumentElement().getNodeName());
 
             NodeList nList = doc.getDocumentElement().getElementsByTagName("TheatreArea");
 
@@ -51,9 +51,8 @@ public class Mainclass {
                     int ID = Integer.valueOf(element.getElementsByTagName("ID").item(0).getTextContent());
                     String name = element.getElementsByTagName("Name").item(0).getTextContent();
 
-                    if(i>=2){
+                    if(i>0){ // ei lisätä tietoja "Valitse alue/teatteri"
                         arrayList.add(new Theaterinfo(name, ID)); //lisätään olio listalle
-                        //System.out.println(arrayList.get(i-2).getname() + "+" + arrayList.get(i-2).getID());
                     }
 
                 }
